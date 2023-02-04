@@ -1,0 +1,59 @@
+First clarify requirements and then object identification(objects that can be created)
+Requirements       										|							Objects
+a. How many dice?	   									<-							Dice
+	i) 1 but should be scalable
+b. How many snakes and ladders							<-							snakes and ladders
+	i)should be able to dynamically define during				
+	  setup time.					
+c.	--   												<-							Board
+d. Winning condition									<-							Players
+	i) Any one wins game finished.
+e. -- 													<-							Cells	 
+
+Player object{
+	String id;
+	int currentPosition;
+}
+
+Dice{
+	int diceCount;
+	rollDice(){};
+}
+
+Snake{
+	int start; 			-------------
+	int end;						|
+}									|
+									|
+Ladder{								----------- Can Create a common object which takes you from one cell to another(JUMP)	
+	int start;						|
+	int end;						|
+}									|
+						-------------
+Jump{
+	int start;
+	int end;
+}
+
+Board{
+	Cells[][];
+}
+
+Cell{
+	Jump; 		//if the cell contains jump check and decide where to take the user.
+}
+
+Game{
+	Board;
+	Dice;
+	Dequeue<Players> playerList; 
+	//deque is taken because when a player plays his chance he is moved to the last and the player at 1st position plays his chance. 
+}
+
+Relationships:
+
+1. Game 'has-a' Board , 'has-a' Dice, 'has-a' Player;
+2. Board 'has-a' Cell;
+3. Cell 'has-a' Jump;
+
+
