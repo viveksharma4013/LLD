@@ -1,0 +1,104 @@
+LLD of Elevator System
+
+Requirements:
+1. How may lifts?
+2. Will each lift have it's own button?
+3. 
+
+
+
+Objects:
+1. Building
+2. Floor
+3. External button
+4. Elevator Car
+	-	Display
+	-	Current Floor
+	- 	Status
+	-	Internal buttons
+	-	Doors
+5. Lift dispatch
+	
+	
+Lift Dispatch Algo:
+	1. Odd/Even floors
+	2. Fixed Floor
+	3. Minimum Seek Time(Lift which is closest to the user)
+	
+Display{
+	int floor;
+	Direction dir;
+}
+
+Elevator Car{
+	int id;   
+	Display disp;
+	int currentFloor;
+	Direction dir;
+	Status status;
+	InternalButton intBut;
+	Door door;
+	
+	move(int destinationFloor, Direction dir){}	
+}
+
+enum Direction{
+	Up;
+	Down;
+}
+
+enum Status{
+	idle;
+	moving;
+}
+//Elevator Car 'has-a' internal button
+Internal Button{
+	InternalButtonDispatcher obj;
+	pressButton(){}
+}
+//Elevator Car 'has-a' display
+
+
+//If an elevator has multiple requests we need DS to manage it which can be handled in Controller
+ElevatorController{
+	Elevator obj;
+	
+	acceptNewRequest();
+	
+	controlElevator();		
+}
+
+
+//This dispatcher has a list of all ElevatorControllers
+//whenever someOne presses a button  the dispatcher returns that particular controller to it
+InternalButtonDispatcher{
+	List<Elevator Controller>
+	
+	submitReq(int);
+
+}
+ExternalButtonDispatcher{
+	List<Elevator Controller>
+	
+	submitReq(int floor, direction);
+}
+
+algos: ExternalButtonDispatcher will implement oddEven, fixedFloor or Minimum Seek Time.
+
+
+ExternalButton{
+	ExternalButtonDispatcher obj;
+	pressButton(floor, direction);
+}
+
+ExternalButton will call InternalButtonDispatcher and it will then do the calculation based on the algo selected.
+
+
+
+Floor{
+	int floorId;
+	ExternalButton obj;
+}
+
+
+
